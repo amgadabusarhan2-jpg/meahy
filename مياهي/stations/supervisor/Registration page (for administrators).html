@@ -1,0 +1,90 @@
+
+<!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/supervisor_home.html">🏠 الرئيسية</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Add%20services%20from%20the%20administrator.html">⚙️ إدارة خدمات المحطة</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Registration%20page%20(for%20administrators).html">📅 حالة اشتراك المحطات</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Employee%20Management%20Screen.html">👥 إدارة الموظفين</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Employee%20page%20+%20ratings.html">👥 الموظفين وتقييمهم</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Change%20the%20administrator's%20number%20or%20password.html">🔑 تغيير رقم المشرف / كلمة المرور</a>
+</div>
+
+
+<style>
+  body { margin:0; font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; }
+  .topbar {
+    background:#0077b6; color:white; padding:10px;
+    display:flex; justify-content:space-around;
+    position:fixed; top:0; width:100%; z-index:1000;
+  }
+  .topbar a {
+    color:white; text-decoration:none; font-weight:bold;
+    padding:8px 12px; transition:0.3s;
+  }
+  .topbar a:hover {
+    background:#023e8a; border-radius:4px;
+  }
+  .container {
+    margin:100px auto; width:90%; background:white;
+    padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+  }
+</style>
+
+
+<div class="container">
+  <h2>📅 حالة اشتراك المحطات</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>اسم المحطة</th>
+        <th>تاريخ بداية الاشتراك</th>
+        <th>تاريخ الانتهاء</th>
+        <th>الأيام المتبقية</th>
+        <th>إجراء</th>
+      </tr>
+    </thead>
+    <tbody id="subscriptions">
+      <!-- مثال -->
+      <tr>
+        <td>محطة اليرموك</td>
+        <td>2026-05-01</td>
+        <td>2026-06-01</td>
+        <td class="days-left"></td>
+        <td><button class="btn" onclick="contactOwner()">📲 تواصل</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .btn { padding: 5px 10px; background: #0077b6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  .btn:hover { background: #023e8a; }
+  .warning { color: #dc3545; font-weight: bold; }
+</style>
+
+<script>
+  // رقمك المخزن هنا
+  const ownerPhone = "962778858932"; // لازم يكون بصيغة دولية بدون صفر بالبداية
+
+  function contactOwner() {
+    const message = "⚠️ تبقى أقل من 5 أيام لانتهاء الاشتراك، الرجاء تجديد الاشتراك.";
+    const url = `https://wa.me/${ownerPhone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  }
+
+  // حساب الأيام المتبقية
+  document.querySelectorAll("#subscriptions tr").forEach(row => {
+    const startDate = new Date(row.cells[1].innerText);
+    const endDate = new Date(row.cells[2].innerText);
+    const today = new Date();
+    const diffTime = endDate - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    row.cells[3].innerText = diffDays + " يوم";
+
+    if (diffDays <= 5) {
+      row.cells[3].classList.add("warning");
+      row.cells[3].innerText = `⚠️ تبقى ${diffDays} أيام`;
+    }
+  });
+</script>

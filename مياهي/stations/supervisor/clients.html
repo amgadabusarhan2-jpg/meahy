@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة المشرف - العملاء</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background: #f4f4f4; }
+    .container { width: 80%; margin: auto; padding: 20px; }
+    h2 { text-align: center; color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background: #0077b6; color: white; }
+    tr:nth-child(even) { background: #e9ecef; }
+    .btn { padding: 5px 10px; background: #0077b6; color: white; border: none; cursor: pointer; }
+    .btn:hover { background: #023e8a; }
+    .search-box { margin-bottom: 15px; text-align: center; }
+    input[type="text"] { padding: 8px; width: 50%; border: 1px solid #ccc; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/supervisor_home.html">🏠 الرئيسية</a>
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/Order%20log.html">📑 سجل الطلبات</a>
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/Today's%20inventory.html">📊 جرد اليوم</a>
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/Station%20status%20management.html">🏪 حالة المحطة</a>
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/clients.html">📅 اشتراكات العملاء</a>
+</div>
+
+<style>
+  body { margin:0; font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; }
+  .topbar {
+    background:#0077b6; color:white; padding:10px;
+    display:flex; justify-content:space-around;
+    position:fixed; top:0; width:100%; z-index:1000;
+  }
+  .topbar a {
+    color:white; text-decoration:none; font-weight:bold;
+    padding:8px 12px; transition:0.3s;
+  }
+  .topbar a:hover {
+    background:#023e8a; border-radius:4px;
+  }
+  .container {
+    margin:100px auto; width:90%; background:white;
+    padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+  }
+</style>
+
+
+  <div class="container">
+    <h2>📋 قائمة العملاء المرتبطين بالمحطة</h2>
+
+    <!-- مربع البحث -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث بالاسم أو رقم الهاتف">
+    </div>
+
+    <!-- جدول العملاء -->
+    <table id="clientsTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>رقم الهاتف</th>
+          <th>الموقع</th>
+          <th>الوصف</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>أحمد</td>
+          <td>0791234567</td>
+          <td>مادبا</td>
+          <td>قرب مدرسة الثقافة</td>
+          <td><button class="btn">تفاصيل</button></td>
+        </tr>
+        <tr>
+          <td>ليلى</td>
+          <td>0789876543</td>
+          <td>عمان</td>
+          <td>شارع الجامعة الأردنية</td>
+          <td><button class="btn">تفاصيل</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // تحقق من رقم الهاتف (10 أرقام)
+    function validatePhone(phone) {
+      const regex = /^[0-9]{10}$/;
+      return regex.test(phone);
+    }
+
+    // مثال: التحقق عند الضغط على زر التفاصيل
+    document.querySelectorAll(".btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const row = this.closest("tr");
+        const phone = row.cells[1].innerText;
+        if (!validatePhone(phone)) {
+          alert("⚠️ رقم الهاتف غير صالح (يجب أن يكون 10 أرقام)");
+        } else {
+          alert("✅ البيانات صحيحة، عرض تفاصيل العميل...");
+        }
+      });
+    });
+
+    // بحث في الجدول
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll("#clientsTable tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

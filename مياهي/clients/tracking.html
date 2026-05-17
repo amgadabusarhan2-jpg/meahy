@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تتبع الطلب</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background: #f4f4f4; }
+    .container { width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
+    h2 { color: #0077b6; }
+    .status { margin: 20px 0; padding: 10px; border-radius: 6px; background: #e9ecef; }
+    .step { margin: 10px 0; padding: 10px; border-radius: 6px; }
+    .pending { background: #ffc107; color: #333; }
+    .accepted { background: #17a2b8; color: white; }
+    .onway { background: #0077b6; color: white; }
+    .delivered { background: #28a745; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🚚 تتبع الطلب</h2>
+    <div class="status">
+      <div class="step pending">📌 بانتظار قبول الطلب</div>
+      <div class="step accepted">✅ تم قبول الطلب من السائق</div>
+      <div class="step onway">🚚 السائق في الطريق</div>
+      <div class="step delivered">🎉 تم التوصيل</div>
+    </div>
+  </div>
+<!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/Customer%20page%20(add%20driver%20rating%20option).html">⭐ تقييم المحطة</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/log_in/station_selection.html">🏪 تغيير المحطة</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/tracking.html">🚚 تتبع الطلب</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/clients%20home.html">🛒 طلب خدمة</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/clients%20exit%20confirmation.html">تسجيل خروج</a>
+</div>
+
+<style>
+.topbar {
+  background:#0077b6; color:white; padding:10px; display:flex; justify-content:space-around;
+  position:fixed; top:0; width:100%; z-index:1000;
+}
+.topbar a { color:white; text-decoration:none; font-weight:bold; padding:8px 12px; }
+.topbar a:hover { background:#023e8a; border-radius:4px; }
+body { margin-top:60px; } /* عشان المحتوى ما يختفي تحت الشريط */
+</style>
+
+  <script>
+    // مثال تجريبي: تغيير الحالة كل 3 ثواني
+    const steps = document.querySelectorAll(".step");
+    let current = 0;
+    function updateStatus() {
+      steps.forEach((step, index) => {
+        step.style.opacity = index <= current ? "1" : "0.3";
+      });
+      current++;
+      if (current >= steps.length) current = steps.length - 1;
+    }
+    setInterval(updateStatus, 3000);
+  </script>
+</body>
+</html>

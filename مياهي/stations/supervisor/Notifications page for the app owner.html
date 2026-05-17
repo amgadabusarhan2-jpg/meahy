@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+
+<!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/supervisor_home.html">🏠 الرئيسية</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Add%20services%20from%20the%20administrator.html">⚙️ إدارة خدمات المحطة</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Registration%20page%20(for%20administrators).html">📅 حالة اشتراك المحطات</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Employee%20Management%20Screen.html">👥 إدارة الموظفين</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Employee%20page%20+%20ratings.html">👥 الموظفين وتقييمهم</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Change%20the%20administrator's%20number%20or%20password.html">🔑 تغيير رقم المشرف / كلمة المرور</a>
+</div>
+
+
+<style>
+  body { margin:0; font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; }
+  .topbar {
+    background:#0077b6; color:white; padding:10px;
+    display:flex; justify-content:space-around;
+    position:fixed; top:0; width:100%; z-index:1000;
+  }
+  .topbar a {
+    color:white; text-decoration:none; font-weight:bold;
+    padding:8px 12px; transition:0.3s;
+  }
+  .topbar a:hover {
+    background:#023e8a; border-radius:4px;
+  }
+  .container {
+    margin:100px auto; width:90%; background:white;
+    padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+  }
+</style>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>إشعارات المشرفين</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; margin:0; }
+    .container {
+      width: 600px; margin: 80px auto; background:white;
+      padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+    }
+    h2 { text-align:center; color:#0077b6; }
+    table { width:100%; border-collapse:collapse; margin-top:15px; }
+    th, td { border:1px solid #ccc; padding:10px; text-align:center; }
+    th { background:#0077b6; color:white; }
+    tr:nth-child(even) { background:#f2f2f2; }
+    .btn {
+      display:block; width:100%; padding:12px; margin-top:20px;
+      background:#25D366; color:white; border:none; border-radius:6px;
+      cursor:pointer; font-size:16px; font-weight:bold;
+    }
+    .btn:hover { background:#128C7E; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔔 إشعارات المشرفين</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>رقم الإشعار</th>
+          <th>الموضوع</th>
+          <th>التفاصيل</th>
+          <th>التاريخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>تنبيه</td>
+          <td>يرجى تفعيل اشتراكات المحطة قبل نهاية الشهر</td>
+          <td>2026-05-17</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>إجراء</td>
+          <td>تحديث بيانات الموظفين في النظام</td>
+          <td>2026-05-15</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>ملاحظة</td>
+          <td>التأكد من توفر الجرد اليومي بشكل صحيح</td>
+          <td>2026-05-14</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- زر واتساب -->
+    <button class="btn" onclick="window.location.href='https://wa.me/962778858932'">📲 تواصل مع الدعم الفني عبر واتساب</button>
+  </div>
+</body>
+</html>

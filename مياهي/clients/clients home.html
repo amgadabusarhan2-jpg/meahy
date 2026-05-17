@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>العميل - الصفحة الرئيسية</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background: #f4f4f4; margin:0; }
+    .container { width: 400px; margin: 80px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+    h2 { text-align: center; color: #0077b6; }
+    label { display: block; margin-top: 10px; }
+    select, input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    .btn { width: 100%; padding: 10px; margin-top: 15px; background: #0077b6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #023e8a; }
+    /* الشريط */
+    .topbar {
+      background:#0077b6; color:white; padding:10px; display:flex; justify-content:space-around;
+      position:fixed; top:0; width:100%; z-index:1000;
+    }
+    .topbar a { color:white; text-decoration:none; font-weight:bold; padding:8px 12px; }
+    .topbar a:hover { background:#023e8a; border-radius:4px; }
+  </style>
+</head>
+<body>
+
+  <!-- الشريط العلوي -->
+  <div class="topbar">
+    <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/Customer%20page%20(add%20driver%20rating%20option).html">⭐ تقييم المحطة</a>
+    <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/log_in/station_selection.html">🏪 تغيير المحطة</a>
+    <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/tracking.html">🚚 تتبع الطلب</a>
+    <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/clients%20home.html">🛒 طلب خدمة</a>
+    <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/clients%20exit%20confirmation.html">تسجيل خروج</a>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="container">
+    <h2>🚰 طلب خدمة</h2>
+    <form id="orderForm">
+      <label>اختر الخدمة:</label>
+      <select id="service">
+        <option value="">اختر الخدمة</option>
+        <option value="exchange">تبديل عبوات ماء</option>
+        <option value="buy">شراء عبوة ماء ممتلئة</option>
+        <option value="machine">شراء ماكينة فلتر/كولر</option>
+      </select>
+
+      <label>عدد العبوات / الأجهزة:</label>
+      <input type="number" id="quantity" min="1" placeholder="أدخل العدد">
+
+      <button type="submit" class="btn">إرسال الطلب</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const service = document.getElementById("service").value;
+      const quantity = document.getElementById("quantity").value;
+
+      if (service === "" || quantity === "" || quantity <= 0) {
+        alert("⚠️ الرجاء اختيار الخدمة وإدخال العدد بشكل صحيح");
+        return;
+      }
+
+      alert("✅ تم إرسال الطلب: " + service + " × " + quantity);
+      // لاحقاً: نخزن الطلب وننقل العميل لصفحة تتبع الطلب
+      window.location.href = "file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/tracking.html";
+    });
+  </script>
+</body>
+</html>

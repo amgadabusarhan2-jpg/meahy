@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+  <!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/employees/drivers/Drivers%20home.html">🏠 الرئيسية</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/employees/drivers/My%20driver%20ratings.html">⭐ تقييماتي</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/employees/drivers/Available%20orders.html">📋 الطلبات المتاحة</a>
+</div>
+
+<style>
+  body { margin:0; font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; }
+  .topbar {
+    background:#0077b6; color:white; padding:10px;
+    display:flex; justify-content:space-around;
+    position:fixed; top:0; width:100%; z-index:1000;
+  }
+  .topbar a {
+    color:white; text-decoration:none; font-weight:bold;
+    padding:8px 12px; transition:0.3s;
+  }
+  .topbar a:hover {
+    background:#023e8a; border-radius:4px;
+  }
+  .container {
+    margin:100px auto; width:90%; background:white;
+    padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+  }
+</style>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>📊 الجرد اليومي</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; margin:0; }
+    .container { width:90%; margin:30px auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc; }
+    h2 { text-align:center; color:#0077b6; }
+    table { width:100%; border-collapse:collapse; margin-top:15px; }
+    th, td { border:1px solid #ccc; padding:8px; text-align:center; }
+    th { background:#0077b6; color:white; }
+    tr:nth-child(even) { background:#f2f2f2; }
+    .summary { margin-top:20px; padding:10px; background:#e9ecef; border-radius:6px; }
+    .notes { margin-top:20px; }
+    .notes ul { list-style-type: disc; padding-right:20px; }
+    .date-picker { margin:10px 0; text-align:center; }
+    .date-picker input { padding:5px; border:1px solid #ccc; border-radius:4px; }
+    .btn { padding:5px 10px; background:#0077b6; color:white; border:none; border-radius:4px; cursor:pointer; }
+    .btn:hover { background:#023e8a; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📊 الجرد اليومي</h2>
+
+    <!-- اختيار اليوم -->
+    <div class="date-picker">
+      <label>اختر اليوم:</label>
+      <input type="date" id="inventoryDate">
+      <button class="btn" onclick="loadInventory()">عرض</button>
+    </div>
+
+    <!-- جدول الطلبات -->
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>رقم الطلب</th>
+          <th>اسم العميل</th>
+          <th>الخدمة</th>
+          <th>العدد</th>
+          <th>المبلغ (دينار)</th>
+          <th>الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>401</td>
+          <td>أحمد</td>
+          <td>تبديل عبوات</td>
+          <td>2</td>
+          <td>3.0</td>
+          <td>✅ تم التوصيل</td>
+        </tr>
+        <tr>
+          <td>402</td>
+          <td>ليلى</td>
+          <td>شراء عبوة</td>
+          <td>1</td>
+          <td>2.0</td>
+          <td>✅ تم التوصيل</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- المجموع الكلي -->
+    <div class="summary" id="summaryBox">
+      💰 المجموع الكلي: 5.0 دينار
+    </div>
+
+    <!-- ملاحظات الزبائن -->
+    <div class="notes">
+      <h3>📝 ملاحظات الزبائن</h3>
+      <ul>
+        <li>أحمد: الخدمة ممتازة وسريعة.</li>
+        <li>ليلى: جيدة لكن أحياناً في تأخير.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function loadInventory() {
+      const date = document.getElementById("inventoryDate").value;
+      if (!date) {
+        alert("⚠️ الرجاء اختيار يوم");
+        return;
+      }
+      // لاحقاً تربط مع قاعدة بيانات أو API لعرض بيانات اليوم المحدد
+      alert("📊 عرض جرد يوم: " + date);
+    }
+  </script>
+
+</body>
+</html>

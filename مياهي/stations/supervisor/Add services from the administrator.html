@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/مياهي/stations/supervisor/supervisor_home.html">🏠 الرئيسية</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Add%20services%20from%20the%20administrator.html">⚙️ إدارة خدمات المحطة</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Registration%20page%20(for%20administrators).html">📅 حالة اشتراك المحطات</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Employee%20Management%20Screen.html">👥 إدارة الموظفين</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Employee%20page%20+%20ratings.html">👥 الموظفين وتقييمهم</a>
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/supervisor/Change%20the%20administrator's%20number%20or%20password.html">🔑 تغيير رقم المشرف / كلمة المرور</a>
+</div>
+
+<style>
+  body { margin:0; font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; }
+  .topbar {
+    background:#0077b6; color:white; padding:10px;
+    display:flex; justify-content:space-around;
+    position:fixed; top:0; width:100%; z-index:1000;
+  }
+  .topbar a {
+    color:white; text-decoration:none; font-weight:bold;
+    padding:8px 12px; transition:0.3s;
+  }
+  .topbar a:hover {
+    background:#023e8a; border-radius:4px;
+  }
+  .container {
+    margin:100px auto; width:90%; background:white;
+    padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+  }
+</style>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>إدارة خدمات المحطة</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background: #f4f4f4; }
+    .container { width: 600px; margin: 50px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+    h2 { text-align: center; color: #0077b6; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    .btn { padding: 8px 15px; margin-top: 15px; background: #0077b6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #023e8a; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background: #0077b6; color: white; }
+    tr:nth-child(even) { background: #f2f2f2; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>⚙️ إدارة خدمات المحطة</h2>
+    <form id="serviceForm">
+      <label>اسم الخدمة:</label>
+      <select id="serviceName">
+        <option value="">اختر خدمة جاهزة</option>
+        <option value="تبديل عبوات ماء">تبديل عبوات ماء</option>
+        <option value="تفريغ عبوة">تفريغ عبوة</option>
+        <option value="شراء عبوة ماء ممتلئة">شراء عبوة ماء ممتلئة</option>
+        <option value="شراء ماكينة فلتر/كولر">شراء ماكينة فلتر/كولر</option>
+      </select>
+
+      <label>أو اكتب خدمة جديدة:</label>
+      <input type="text" id="customService" placeholder="أدخل اسم الخدمة الجديدة">
+
+      <label>السعر (بالدينار):</label>
+      <input type="number" id="price" min="0" step="0.1" placeholder="أدخل السعر">
+
+      <button type="submit" class="btn">➕ إضافة الخدمة</button>
+    </form>
+
+    <!-- جدول الخدمات -->
+    <table id="servicesTable">
+      <thead>
+        <tr>
+          <th>اسم الخدمة</th>
+          <th>السعر</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- خدمات تجريبية -->
+        <tr><td>تبديل عبوات ماء</td><td>1.5</td><td><button class="btn">حذف</button></td></tr>
+        <tr><td>شراء عبوة ممتلئة</td><td>2.0</td><td><button class="btn">حذف</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById("serviceForm");
+    const table = document.getElementById("servicesTable").querySelector("tbody");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const serviceName = document.getElementById("serviceName").value;
+      const customService = document.getElementById("customService").value.trim();
+      const price = document.getElementById("price").value;
+
+      // تحديد اسم الخدمة: إما من القائمة أو من النص
+      const finalService = customService !== "" ? customService : serviceName;
+
+      if (finalService === "" || price === "" || price <= 0) {
+        alert("⚠️ الرجاء اختيار أو كتابة اسم الخدمة وإدخال السعر بشكل صحيح");
+        return;
+      }
+
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${finalService}</td><td>${price}</td><td><button class="btn">حذف</button></td>`;
+      table.appendChild(row);
+
+      // إعادة تعيين النموذج
+      form.reset();
+
+      // إضافة حدث الحذف
+      row.querySelector("button").addEventListener("click", function() {
+        row.remove();
+      });
+    });
+
+    // إضافة حدث الحذف للخدمات التجريبية
+    document.querySelectorAll("#servicesTable .btn").forEach(button => {
+      button.addEventListener("click", function() {
+        this.closest("tr").remove();
+      });
+    });
+  </script>
+</body>
+</html>

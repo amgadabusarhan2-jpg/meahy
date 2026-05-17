@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>اختيار المحطة</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background: #f4f4f4; }
+    .container { width: 600px; margin: 50px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+    h2 { text-align: center; color: #0077b6; }
+    .search-box { margin-bottom: 15px; text-align: center; }
+    input[type="text"] { padding: 8px; width: 60%; border: 1px solid #ccc; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background: #0077b6; color: white; }
+    tr:nth-child(even) { background: #f2f2f2; }
+    .btn { padding: 5px 10px; background: #0077b6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #023e8a; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🏪 اختر المحطة التي ستتعامل معها</h2>
+
+    <!-- مربع البحث -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث باسم المحطة أو الموقع">
+    </div>
+
+    <!-- جدول المحطات -->
+    <table id="stationsTable">
+      <thead>
+        <tr>
+          <th>اسم المحطة</th>
+          <th>الموقع</th>
+          <th>الوصف</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>محطة الندى</td><td>عمان - الجامعة</td><td>قرب دوار الجامعة الأردنية</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الصفاء</td><td>مادبا - الفيصلية</td><td>قرب مدرسة الثقافة</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الكوثر</td><td>الزرقاء - الجديدة</td><td>قرب مجمع الحسين</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الرضا</td><td>إربد - الوسطى</td><td>قرب سوق المدينة</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الفجر</td><td>عمان - جبل الحسين</td><td>قرب مستشفى الأردن</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة النور</td><td>مادبا - الرياض</td><td>قرب مسجد السلام</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الياسمين</td><td>عمان - الياسمين</td><td>قرب دوار الياسمين</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة البسمة</td><td>الزرقاء - القديمة</td><td>قرب محطة الباص</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الغدير</td><td>إربد - الحصن</td><td>قرب مدرسة الجنوب</td><td><button class="btn">اختيار</button></td></tr>
+        <tr><td>محطة الهناء</td><td>عمان - الصويفية</td><td>قرب سيتي مول</td><td><button class="btn">اختيار</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // البحث في الجدول
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll("#stationsTable tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+      });
+    });
+
+    // اختيار المحطة
+    document.querySelectorAll(".btn").forEach(button => {
+      button.addEventListener("click", function() {
+        const row = this.closest("tr");
+        const stationName = row.cells[0].innerText;
+        alert("✅ تم اختيار المحطة: " + stationName);
+        // بعد الاختيار ينقل المستخدم لصفحة أخرى (ضع الرابط المناسب هنا)
+        window.location.href = "file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/clients/clients%20home.html"; 
+      });
+    });
+  </script>
+</body>
+</html>

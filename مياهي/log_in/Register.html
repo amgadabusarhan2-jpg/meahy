@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إنشاء حساب جديد</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; margin:0; }
+    .topbar {
+      background:#0077b6; color:white; padding:10px;
+      display:flex; justify-content:space-around;
+      position:fixed; top:0; width:100%; z-index:1000;
+    }
+    .topbar a {
+      color:white; text-decoration:none; font-weight:bold;
+      padding:8px 12px; transition:0.3s;
+    }
+    .topbar a:hover { background:#023e8a; border-radius:4px; }
+    .container {
+      margin:100px auto; width:400px; background:white;
+      padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+    }
+    h2 { text-align:center; color:#0077b6; }
+    label { display:block; margin-top:10px; }
+    input, select { width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:4px; }
+    .btn { width:100%; padding:10px; margin-top:15px; background:#0077b6; color:white; border:none; border-radius:4px; cursor:pointer; }
+    .btn:hover { background:#023e8a; }
+  </style>
+</head>
+<body>
+
+  <!-- الشريط العلوي -->
+  <div class="topbar">
+    <a href="file:///C:/Users/amjad/مياهي/log_in/login.html">🏠 الرئيسية</a>
+  </div>
+
+  <!-- النموذج -->
+  <div class="container">
+    <h2>📝 إنشاء حساب جديد</h2>
+    <form id="registerForm">
+      <label>نوع الحساب:</label>
+      <select id="accountType">
+        <option value="">اختر نوع الحساب</option>
+        <option value="client">عميل</option>
+        <option value="station">محطة</option>
+      </select>
+
+      <label>الاسم:</label>
+      <input type="text" id="name" placeholder="أدخل اسمك(عميل) / اسم المحطة(للمحطة)">
+
+      <label>رقم الهاتف:</label>
+      <input type="text" id="phone" placeholder="أدخل رقم الهاتف">
+
+      <label>كلمة المرور:</label>
+      <input type="password" id="password" placeholder="أدخل كلمة المرور">
+
+      <label>تأكيد كلمة المرور:</label>
+      <input type="password" id="confirmPassword" placeholder="أعد إدخال كلمة المرور">
+
+      <!-- تحديد الموقع -->
+      <label>المحافظة:</label>
+      <select id="province" onchange="loadAreas()">
+        <option value="">اختر المحافظة</option>
+        <option value="عمان">عمان</option>
+        <option value="الزرقاء">الزرقاء</option>
+        <option value="إربد">إربد</option>
+        <option value="مادبا">مادبا</option>
+      </select>
+
+      <label>المنطقة:</label>
+      <select id="area" onchange="loadDistricts()">
+        <option value="">اختر المنطقة</option>
+      </select>
+
+      <label>الحي:</label>
+      <select id="district">
+        <option value="">اختر الحي</option>
+      </select>
+
+      <label>وصف الموقع:</label>
+      <input type="text" id="description" placeholder="مثال: قرب مدرسة الثقافة">
+
+      <!-- رابط الموقع (اختياري) -->
+      <label>أدخل رابط موقعك (اختياري):</label>
+      <input type="text" id="website" placeholder="مثال: https://example.com">
+
+      <button type="submit" class="btn">إنشاء الحساب</button>
+    </form>
+  </div>
+
+  <script>
+    // بيانات تجريبية للمحافظات والمناطق والأحياء
+    const data = {
+      "عمان": { "المدينة": ["الحي الشرقي", "الحي الغربي"], "الجامعة": ["حي الطلاب", "حي الأساتذة"] },
+      "الزرقاء": { "الزرقاء الجديدة": ["حي النصر", "حي الحسين"], "الزرقاء القديمة": ["حي الوسط", "حي الجندي"] },
+      "إربد": { "إربد الوسطى": ["حي السوق", "حي الجامعة"], "الحصن": ["حي الجنوب", "حي الشمال"] },
+      "مادبا": { "مادبا الوسطى": ["حي الثقافة", "حي الرياض"], "الفيصلية": ["حي النزهة", "حي السلام"] }
+    };
+
+    function loadAreas() {
+      const province = document.getElementById("province").value;
+      const areaSelect = document.getElementById("area");
+      areaSelect.innerHTML = "<option value=''>اختر المنطقة</option>";
+      if (province && data[province]) {
+        Object.keys(data[province]).forEach(area => {
+          const option = document.createElement("option");
+          option.value = area;
+          option.text = area;
+          areaSelect.appendChild(option);
+        });
+      }
+      document.getElementById("district").innerHTML = "<option value=''>اختر الحي</option>";
+    }
+
+    function loadDistricts() {
+      const province = document.getElementById("province").value;
+      const area = document.getElementById("area").value;
+      const districtSelect = document.getElementById("district");
+      districtSelect.innerHTML = "<option value=''>اختر الحي</option>";
+      if (province && area && data[province][area]) {
+        data[province][area].forEach(district => {
+          const option = document.createElement("option");
+          option.value = district;
+          option.text = district;
+          districtSelect.appendChild(option);
+        });
+      }
+    }
+
+    // تحقق من القيم وتوجيه حسب نوع الحساب
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
+      const accountType = document.getElementById("accountType").value;
+      const website = document.getElementById("website").value.trim(); // اختياري
+
+      if (!/^[0-9]{10}$/.test(phone)) {
+        alert("⚠️ رقم الهاتف يجب أن يكون 10 أرقام");
+        return;
+      }
+      if (password === "" || confirmPassword === "") {
+        alert("⚠️ الرجاء إدخال كلمة المرور وتأكيدها");
+        return;
+      }
+      if (password !== confirmPassword) {
+        alert("⚠️ كلمة المرور غير متطابقة");
+        return;
+      }
+      if (accountType === "") {
+        alert("⚠️ الرجاء اختيار نوع الحساب");
+        return;
+      }
+
+      // ✅ إذا لم يدخل رابط الموقع، يظل التسجيل شغال
+      if (website) {
+        console.log("رابط الموقع المدخل: " + website);
+      }
+
+      alert("✅ الحساب تم إنشاؤه بنجاح (تجريبي)");
+
+      // توجيه حسب نوع الحساب
+      if (accountType === "client") {
+        window.location.href = "file:///C:/Users/amjad/مياهي/log_in/station_selection.html";
+      } else if (accountType === "station") {
+        window.location.href = "file:///C:/Users/amjad/مياهي/stations/supervisor/supervisor_home.html";
+      }
+    });
+  </script>
+</body>
+</html>

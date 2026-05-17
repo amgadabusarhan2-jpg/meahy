@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<!-- الشريط العلوي -->
+<div class="topbar">
+  <a href="file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/log_in/login.html">🏠 الرئيسية</a>
+</div>
+
+<style>
+  body { margin:0; font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; }
+  .topbar {
+    background:#0077b6; color:white; padding:10px;
+    display:flex; justify-content:space-around;
+    position:fixed; top:0; width:100%; z-index:1000;
+  }
+  .topbar a {
+    color:white; text-decoration:none; font-weight:bold;
+    padding:8px 12px; transition:0.3s;
+  }
+  .topbar a:hover {
+    background:#023e8a; border-radius:4px;
+  }
+  .container {
+    margin:100px auto; width:90%; background:white;
+    padding:20px; border-radius:8px; box-shadow:0 0 10px #ccc;
+  }
+</style>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول - السائق</title>
+  <style>
+    body { font-family: Tahoma, sans-serif; direction: rtl; background:#f4f4f4; margin:0; }
+    .container {
+      width: 350px; margin: 80px auto; background: white; padding: 20px;
+      border-radius: 8px; box-shadow: 0 0 10px #ccc;
+    }
+    h2 { text-align: center; color: #0077b6; }
+    label { display: block; margin-top: 10px; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 8px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    .btn {
+      width: 100%; padding: 10px; margin-top: 15px;
+      background: #0077b6; color: white; border: none;
+      border-radius: 4px; cursor: pointer;
+    }
+    .btn:hover { background: #023e8a; }
+    .note {
+      margin-top: 15px; padding: 10px; background:#e9ecef;
+      border-radius: 6px; font-size: 14px; color:#333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🚚 تسجيل الدخول - السائق</h2>
+    <form id="driverLoginForm">
+      <label>رقم الهاتف:</label>
+      <input type="text" id="phone" placeholder="أدخل رقم الهاتف">
+
+      <label>كلمة المرور:</label>
+      <input type="password" id="password" placeholder="أدخل كلمة المرور">
+
+      <button type="submit" class="btn">دخول</button>
+    </form>
+
+    <!-- الملاحظة -->
+    <div class="note">
+      📌 ملاحظة: مدير المحطة هو من يضع لك رقم الهاتف وكلمة المرور.  
+      إذا واجهت أي مشكلة في الدخول، يرجى التواصل مع مديرك مباشرة.
+    </div>
+  </div>
+
+  <script>
+    // تحقق من القيم
+    document.getElementById("driverLoginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (phone === "" || password === "") {
+        alert("⚠️ الرجاء تعبئة جميع الحقول");
+        return;
+      }
+      if (!/^[0-9]{10}$/.test(phone)) {
+        alert("⚠️ رقم الهاتف يجب أن يكون 10 أرقام");
+        return;
+      }
+
+      alert("✅ تسجيل الدخول ناجح (تجريبي)");
+      // لاحقاً: هنا تربطها بالانتقال لصفحة السائق الرئيسية
+      window.location.href = "file:///C:/Users/amjad/%D9%85%D9%8A%D8%A7%D9%87%D9%8A/stations/employees/drivers/Drivers%20home.html";
+    });
+  </script>
+
+</body>
+</html>
